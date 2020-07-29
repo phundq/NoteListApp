@@ -1,0 +1,24 @@
+
+  .logo {
+    width: 180px;
+    height: 31px;
+    margin: 0px 24px 0px -27px;
+    float: left;
+  }
+  .logo-title{
+      display: block;
+      color: #dedede;
+      
+      font-size: 19px;
+  }
+
+  nz-header {
+    top: 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+  }
+
+  [nz-menu] {
+    line-height: 64px;
+  }

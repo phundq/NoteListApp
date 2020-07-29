@@ -1,0 +1,48 @@
+<nz-layout>
+    <nz-sider nzCollapsible [(nzCollapsed)]="collapseService.isCollapsed" [nzTrigger]="null" [nzWidth]="250" [nzCollapsedWidth]="0" >
+      <div class="logo"></div>
+      <ul nz-menu nzMode="inline" style="height: 100%;"  [nzTheme]="theme ? 'dark' : 'light'">
+        <li style="display: flex; justify-content: space-between; padding: 1em 1.6em;">
+            
+            
+            <nz-switch [(ngModel)]="theme">
+                <span checked>Dark</span>
+                <span unchecked>Light</span>
+            </nz-switch>
+        </li>
+        <li nz-submenu nzOpen nzTitle="Notes" nzIcon="mail" [routerLink] = "['/notes']">
+            <ul>
+                <li nz-menu-group nzTitle="Item 1">
+                    <ul>
+                        <li nz-menu-item nzSelected [routerLink] = "['/notes']">All notes</li>
+                        <li nz-menu-item>Option 2</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li nz-submenu nzTitle="Labels" nzIcon="appstore" [routerLink] = "['/labels']">
+            <ul>
+                <li nz-menu-item  [routerLink] = "['/labels']">All labels</li>
+                <li nz-menu-item>Option 6</li>
+                <li nz-submenu nzTitle="Submenu">
+                    <ul>
+                        <li nz-menu-item>Option 7</li>
+                        <li nz-menu-item>Option 8</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li nz-submenu nzTitle="Setting" nzIcon="setting" [routerLink] = "['/home']">
+            <ul>
+                <li nz-menu-item>Option 9</li>
+                <li nz-menu-item>Option 10</li>
+                <li nz-menu-item>Option 11</li>
+            </ul>
+        </li>
+    </ul>
+    </nz-sider>
+<nz-layout>
+    <app-content  [content] = "content"></app-content>
+</nz-layout>
+  </nz-layout>
+

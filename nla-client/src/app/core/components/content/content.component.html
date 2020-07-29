@@ -1,0 +1,8 @@
+<nz-layout>
+    <nz-content>
+        <app-list-notes *ngIf="content === 'listNotesComponent'"></app-list-notes>
+        <app-note-detail *ngIf="content === 'noteDetailComponent'"></app-note-detail>
+        <app-labels *ngIf="content === 'labelsComponent'"></app-labels>
+    </nz-content>
+    
+</nz-layout>
