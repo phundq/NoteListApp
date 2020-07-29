@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../../services/note.service';
 import { Note } from '../../model/note';
@@ -12,20 +13,17 @@ export class ListNotesComponent implements OnInit {
   constructor(private noteService: NoteService) { }
 
   ngOnInit(): void {
-    console.log(this.noteService.getNote());
+    this.notes =  this.noteService.getNote();
   }
 
-  notes: Note[] = this.noteService.getNote();
+  notes: Observable<Note[]> = this.noteService.getNote();
 
   addNote(){
-    this.notes = this.noteService.addNote();
+    this.notes =  this.noteService.getNote();
   }
 
-  removeLastNote(){
-    this.notes = this.noteService.remoteLastNote();
-  }
   removeNote(id: number){
-    this.notes = this.noteService.remoteNote(id);
+    this.notes =  this.noteService.getNote();
   }
 
   showNoteDetail(id: 0){

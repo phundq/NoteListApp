@@ -17,7 +17,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-public class CodeDTO extends BaseModel {
+public class NoteDTO extends BaseModel {
 
 	@Getter @Setter
 	private String title;
@@ -25,14 +25,23 @@ public class CodeDTO extends BaseModel {
 	@Getter @Setter
 	private String content;
 	
+	@Getter @Setter
+	private String description;
+	
 	@Setter
     private Label label;
 
 	@JsonIgnore
     private Integer folderId;
+	
+	@Getter
+    private LabelDTO labelResponse;
 
-	public CodeDTO(Note note) {
+	public NoteDTO(Note note) {
 		BeanUtils.copyProperties(note, this);
+		if(this.label != null) {
+			this.labelResponse = new LabelDTO(this.label);
+		}
 	}
 	
 	

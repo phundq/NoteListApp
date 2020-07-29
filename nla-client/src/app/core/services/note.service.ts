@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { APIService } from './api.service';
 import { Injectable } from '@angular/core';
 import { Note } from '../model/note';
 
@@ -10,7 +12,8 @@ export class NoteService {
       id: 1,
       title: "test A",
       content: "test note first time",
-      noteType: 1,
+      description: "description",
+      noteTypeId: 1,
       created: Date.now(),
       modified: Date.now()
     }
@@ -18,10 +21,13 @@ export class NoteService {
   ];
 
   noteDetail : Note = this.notes[0] ;
-  constructor() { }
 
-  getNote(): Note[]{
-    return this.notes;
+  
+
+  constructor(private apiService : APIService) { }
+
+  getNote(): Observable<Note[]>{
+    return this.apiService.get("/notes");
   }
   addNote(): Note[]{
     let lastNoteId :number;
@@ -31,7 +37,7 @@ export class NoteService {
       lastNoteId = this.notes[this.notes.length - 1].id;
     }
 
-    const note :Note = new Note(lastNoteId + 1,"test " + (lastNoteId +1).toString() , "test note " + (lastNoteId +1).toString(), 1, Date.now(),Date.now());
+    const note :Note = new Note(lastNoteId + 1,"test " + (lastNoteId +1).toString() , "test note " + (lastNoteId +1).toString(), "description for note " + (lastNoteId +1).toString(), 1, Date.now(),Date.now());
     this.notes.push(note);
     return this.notes;
   }
@@ -51,4 +57,5 @@ export class NoteService {
     console.log(this.noteDetail);
     
   }
+
 }

@@ -11,7 +11,7 @@ import com.nla.nlaserver.common.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
-public class FolderDTO extends BaseModel {
+public class LabelDTO extends BaseModel {
 	@Getter @Setter
 	private String name;
 
@@ -21,7 +21,7 @@ public class FolderDTO extends BaseModel {
 	@JsonIgnore
     private Integer userId;
 
-	public FolderDTO(Label label) {
+	public LabelDTO(Label label) {
 		BeanUtils.copyProperties(label, this);
 	}
 }

@@ -39,7 +39,7 @@ public class SwaggerConfig {
     public Docket swaggerSpringfoxDocket() {
         Contact contact = new Contact(
                 name,
-                "https://ffd.net/",
+                "https://nla.net/",
                 "");
 
         List<VendorExtension> vext = new ArrayList<>();
@@ -47,10 +47,10 @@ public class SwaggerConfig {
                 title,
                 description,
                 version,
-                "https://ffd.net/",
+                "https://nla.net/",
                 contact,
                 "MIT",
-                "https://ffd.net/",
+                "https://nla.net/",
                 vext);
 
         Docket docket = new Docket(DocumentationType.SWAGGER_2)

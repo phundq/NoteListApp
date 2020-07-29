@@ -1,13 +1,14 @@
 
 <div style="width: 100%;">
-    <div nz-row>
+    <div nz-row >
         <div nz-col nzXs="24" nzSm="14" nzMd="14">
             <div style="width: 100%; text-align: center; padding: 1em; margin: 1em;">
                 <h2>List Notes</h2>
             </div>
             <div style="width: 100%; padding: 1em 1.5em; margin: 1em;">
                 <nz-list nzBordered>
-                    <nz-list-item *ngFor="let note of notes">
+                    <nz-list-item *ngFor="let note of notes | async">
+                        <!-- <nz-list-item *ngFor="let note of noteMockAPI$ | async"></nz-list-item> -->
                         <span (click)="showNoteDetail(note.id)" nz-typography><mark>{{ note.id }}---{{ note.title }}</mark>&nbsp;&nbsp;&nbsp;{{note.modified | date:'hh:mm MM/dd/yyyy'}}</span>
                         <span>
                             <button (click)="showNoteDetail(note.id)">view {{note.id}}</button>
@@ -19,7 +20,6 @@
             </div>
             <div style="width: 100%; padding: 1em 1.5em; margin: 1em;">
                 <button (click)="addNote();">Add Note</button>
-                <button (click)="removeLastNote();">Remove Last Note</button>
             </div> 
         </div>
         <div nz-col nzXs="24" nzSm="10" nzMd="10">
