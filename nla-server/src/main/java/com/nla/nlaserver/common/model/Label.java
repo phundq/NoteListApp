@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "label")
 public class Label extends BaseModel {

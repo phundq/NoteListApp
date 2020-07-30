@@ -17,6 +17,8 @@ import com.nla.nlaserver.common.dto.StatusResponseDTO;
 import com.nla.nlaserver.common.exception.BadRequestException;
 import com.nla.nlaserver.common.exception.ResourceNotFoundException;
 import com.nla.nlaserver.common.model.Note;
+import com.nla.nlaserver.common.model.NoteLabel;
+import com.nla.nlaserver.common.repository.NoteLabelRepository;
 import com.nla.nlaserver.common.repository.NoteRepository;
 import com.nla.nlaserver.common.util.constant.MessageConstant;
 
@@ -25,6 +27,9 @@ public class NoteService {
 
 	@Autowired
 	NoteRepository noteRepository;
+	
+	@Autowired 
+	NoteLabelRepository noteLabelRepository;
 
 	public List<NoteDTO> getALlNotes() {
 		List<Note> noteList = noteRepository.findAll();
@@ -101,6 +106,12 @@ public class NoteService {
 		if (!request.isEmpty() && idNotExisteds.isEmpty()) {
 			request.forEach(id -> {
 				try {
+					List<NoteLabel> noteLabelList = noteLabelRepository.findByNoteId(id);
+					if(!noteLabelList.isEmpty()) {
+						noteLabelList.stream().forEach(noteLabel -> {
+							noteLabelRepository.deleteById(noteLabel.getId());
+						});
+					}
 					noteRepository.deleteById(id);
 				} catch (Exception e) {
 					throw new BadRequestException(MessageConstant.NOTE_CANNOT_DELETE);

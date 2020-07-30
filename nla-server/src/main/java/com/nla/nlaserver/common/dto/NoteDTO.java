@@ -1,5 +1,9 @@
 package com.nla.nlaserver.common.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nla.nlaserver.common.model.BaseModel;
 import com.nla.nlaserver.common.model.Label;
 import com.nla.nlaserver.common.model.Note;
+import com.nla.nlaserver.common.model.NoteLabel;
+import com.nla.nlaserver.common.model.NoteType;
 
 import lombok.Data;
 import lombok.Getter;
@@ -29,18 +35,25 @@ public class NoteDTO extends BaseModel {
 	private String description;
 	
 	@Setter
-    private Label label;
+	List<NoteLabel> noteLabels = new ArrayList<NoteLabel>();
 
-	@JsonIgnore
-    private Integer folderId;
+	@Getter
+	List<NoteLabelDTO> noteLabelsDTO = new ArrayList<NoteLabelDTO>();
+	
+	@Setter
+	private NoteType noteType;
 	
 	@Getter
-    private LabelDTO labelResponse;
+	private NoteTypeDTO noteTypeDTO;
+	
 
 	public NoteDTO(Note note) {
 		BeanUtils.copyProperties(note, this);
-		if(this.label != null) {
-			this.labelResponse = new LabelDTO(this.label);
+		if(this.noteLabels != null && !noteLabels.isEmpty()) {
+			this.noteLabelsDTO = this.noteLabels.stream().map(NoteLabelDTO::new).collect(Collectors.toList());
+		}
+		if(this.noteType != null) {
+			this.noteTypeDTO = new NoteTypeDTO(this.noteType);
 		}
 	}
 	

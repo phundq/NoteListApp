@@ -1,6 +1,5 @@
-
 <div style="width: 100%;">
-    <div nz-row >
+    <div nz-row>
         <div nz-col nzXs="24" nzSm="14" nzMd="14">
             <div style="width: 100%; text-align: center; padding: 1em; margin: 1em;">
                 <h2>List Notes</h2>
@@ -9,9 +8,10 @@
                 <nz-list nzBordered>
                     <nz-list-item *ngFor="let note of notes | async">
                         <!-- <nz-list-item *ngFor="let note of noteMockAPI$ | async"></nz-list-item> -->
-                        <span (click)="showNoteDetail(note.id)" nz-typography><mark>{{ note.id }}---{{ note.title }}</mark>&nbsp;&nbsp;&nbsp;{{note.modified | date:'hh:mm MM/dd/yyyy'}}</span>
+                        <span (click)="showNoteDetail(note.id)"
+                            nz-typography><mark>{{ note.id }}---{{ note.title }}</mark>&nbsp;&nbsp;&nbsp;{{note.modified | date:'hh:mm MM/dd/yyyy'}}</span>
                         <span>
-                            <button (click)="showNoteDetail(note.id)">view {{note.id}}</button>
+                            <button (click)="showNoteDetail(note.id)">view</button>
                             &nbsp;
                             <button (click)="removeNote(note.id)">delete</button>
                         </span>
@@ -19,13 +19,19 @@
                 </nz-list>
             </div>
             <div style="width: 100%; padding: 1em 1.5em; margin: 1em;">
-                <button (click)="addNote();">Add Note</button>
-            </div> 
+                <button (click) = noteService.showEditNoteModal();>Add Note</button>
+            </div>
         </div>
         <div nz-col nzXs="24" nzSm="10" nzMd="10">
             <div style="width: 100%;">
                 <app-note-detail></app-note-detail>
             </div>
         </div>
-      </div>
+    </div>
 </div>
+
+<!-- modal -->
+
+<app-note-form-edit></app-note-form-edit>
+
+

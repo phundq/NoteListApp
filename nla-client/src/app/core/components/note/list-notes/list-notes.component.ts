@@ -1,7 +1,7 @@
+import { Note } from './../../../model/note';
+import { NoteService } from './../../../services/note.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { NoteService } from '../../services/note.service';
-import { Note } from '../../model/note';
 
 @Component({
   selector: 'app-list-notes',
@@ -10,7 +10,7 @@ import { Note } from '../../model/note';
 })
 export class ListNotesComponent implements OnInit {
 
-  constructor(private noteService: NoteService) { }
+  constructor(public noteService: NoteService) { }
 
   ngOnInit(): void {
     this.notes =  this.noteService.getNote();
@@ -18,6 +18,10 @@ export class ListNotesComponent implements OnInit {
 
   notes: Observable<Note[]> = this.noteService.getNote();
 
+  getNote(){
+    this.notes =  this.noteService.getNote();
+  }
+  
   addNote(){
     this.notes =  this.noteService.getNote();
   }
@@ -31,5 +35,6 @@ export class ListNotesComponent implements OnInit {
     console.log(id);
     
   }
+
 
 }

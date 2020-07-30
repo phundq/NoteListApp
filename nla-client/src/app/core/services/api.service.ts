@@ -16,4 +16,7 @@ export class APIService {
   get(url : string): Observable<any>{
     return this.http.get<any>(BASE_URL + url);
   }
+  post(url : string, body: any): Observable<any>{
+    return this.http.post<any>(BASE_URL + url, body);
+  }
 }
