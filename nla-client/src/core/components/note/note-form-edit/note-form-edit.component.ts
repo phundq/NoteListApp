@@ -2,7 +2,7 @@ import { ListNotesComponent } from './../list-notes/list-notes.component';
 
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NoteService } from 'src/app/core/services/note.service';
+import { NoteService } from 'src/core/services/note.service';
 
 @Component({
   selector: 'app-note-form-edit',
@@ -11,12 +11,14 @@ import { NoteService } from 'src/app/core/services/note.service';
 })
 export class NoteFormEditComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, public noteService: NoteService, public listNotesComponent :ListNotesComponent) { }
+  constructor(private fb: FormBuilder, public noteService: NoteService, public listNotesComponent :ListNotesComponent) {
+   }
 
   ngOnInit(): void {
   }
 
   // data - post - put
+  id: number = null;
   title: string = null;
   description: string = null;
   content: string = null;
@@ -34,14 +36,11 @@ export class NoteFormEditComponent implements OnInit {
       this.noteService.addNote(this.title, this.description, this.noteTypeId, this.content).subscribe(x => console.log(x)
       );
     }
-
     this.listNotesComponent.getNote();
 
-    
-
-
-
     this.closeModal()
+
+    this.resetFormValue();
   }
 
   handlerClickCancel() {
@@ -86,6 +85,26 @@ export class NoteFormEditComponent implements OnInit {
       console.log(this.content)
     }
   }
+
+
+  resetFormValue(){
+    this.title = null;
+    this.description = null;
+    this.content = null;
+    this.noteTypeId = null;
+  }
+
+  setFormValue(data: any){
+    console.log(data)
+    if(data != null){
+      this.id = data.id;
+      this.title = data.title;
+      this.description = data.description;
+      this.noteTypeId = data.noteTypeId;
+      this.content = data.content;
+    }
+  }
+
 
 
 

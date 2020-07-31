@@ -22,12 +22,12 @@ export class ListNotesComponent implements OnInit {
     this.notes =  this.noteService.getNote();
   }
   
-  addNote(){
-    this.notes =  this.noteService.getNote();
-  }
-
   removeNote(id: number){
-    this.notes =  this.noteService.getNote();
+    this.noteService.remoteNote(id).subscribe(res => {
+      console.log(res);
+      this.notes =  this.noteService.getNote();
+    });
+    
   }
 
   showNoteDetail(id: 0){

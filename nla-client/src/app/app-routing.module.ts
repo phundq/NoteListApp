@@ -1,11 +1,12 @@
+import { Error404Component } from './../pages/error404/error404.component';
+import { NoteDetailPageComponent } from './../pages/note-detail-page/note-detail-page.component';
+import { NoteComponent } from './../pages/note/note.component';
+import { LabelComponent } from './../pages/label/label.component';
+import { RoutesConfig } from './../core/configs/routes.config';
+import { HomeComponent } from './../pages/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './core/pages/home/home.component';
-import { RoutesConfig } from './core/configs/routes.config';
-import { Error404Component } from './core/pages/error404/error404.component';
-import { LabelComponent } from './core/pages/label/label.component';
-import { NoteComponent } from './core/pages/note/note.component';
-import { NoteDetailPageComponent } from './core/pages/note-detail-page/note-detail-page.component';
+
 
 const routesNames = RoutesConfig.routesNames;
 const routes: Routes = [

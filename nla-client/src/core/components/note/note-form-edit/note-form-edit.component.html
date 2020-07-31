@@ -8,18 +8,18 @@
     <div nz-row style="margin-bottom: 10px;">
       <div nz-col nzSpan="24">
         <nz-form-label nzRequired >Title</nz-form-label>
-        <input type="text" nz-input id="title" placeholder="Title" (keyup)= "handlerInputChange($event)" />
+        <input type="text" nz-input [value] = "title" id="title" placeholder="Title" (keyup)= "handlerInputChange($event)" />
       </div>
     </div>
 
     <div nz-row style="margin-bottom: 10px;">
       <div nz-col nzSpan="12" >
         <nz-form-label >Description</nz-form-label>
-        <input type="text" nz-input  id="description" placeholder="Description" (keyup)= "handlerInputChange($event)" />
+        <input type="text" nz-input [value] = "description"  id="description" placeholder="Description" (keyup)= "handlerInputChange($event)" />
       </div>
       <div nz-col nzSpan="12"style="padding-left: 10px;">
         <nz-form-label  nzRequired>Note Type</nz-form-label>
-          <nz-select id = "noteTypeId" nzAllowClear style="width: 100%;" ngModel="" nzPlaceHolder="Choose"  (ngModelChange) = "handlerSelectChange($event)">
+          <nz-select id = "noteTypeId" nzAllowClear style="width: 100%;" [(ngModel)] = "noteTypeId" nzPlaceHolder="Choose"  (ngModelChange) = "handlerSelectChange($event)">
             <nz-option nzValue="1" nzLabel="Daily"></nz-option>
             <nz-option nzValue="2" nzLabel="Other" nzDisabled></nz-option>
           </nz-select>
@@ -29,7 +29,7 @@
     <div nz-row>
       <div nz-col nzSpan="24">
         <nz-form-label nzRequired nzFor="content">Content</nz-form-label>
-        <textarea id = "content" rows="4" nz-input (keyup)= "handlerInputChange($event)"></textarea>
+        <textarea id = "content" rows="4" [(ngModel)]="content" placeholder="input your note's content" nz-input (keyup)= "handlerInputChange($event)"></textarea>
       </div>
     </div>
 

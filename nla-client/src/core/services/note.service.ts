@@ -10,11 +10,11 @@ export class NoteService {
   noteDetail : Note ;
   isShowEditNoteModal = false;
   addNewNote = true;
+  dataEdit = null;
 
   constructor(private apiService : APIService) { 
     this.apiService.get("/notes").subscribe(res => {
       this.noteDetail = res[0];
-      console.log(this.noteDetail);
     })
   }
 
@@ -25,7 +25,6 @@ export class NoteService {
     const data = {
       content: content,
       description: description,
-      
       noteTypeId: noteTypeId,
       title: title
     }
@@ -38,8 +37,15 @@ export class NoteService {
     
   
   }
-  remoteNote(id: number){
+  remoteNote(id: number):  Observable<any>{
+    let data = {
+      "ids": [
+        id
+      ]
+    }
+    return this.apiService.delete("/notes/", data);
   }
+
   showNoteDetails(id: number){
     this.apiService.get("/notes/" + id.toString()).subscribe(res => {
       this.noteDetail = res;
@@ -48,7 +54,20 @@ export class NoteService {
     
   }
 
-  showEditNoteModal(){
+  showEditNoteModal(action : string = "add", data : any){
+    if(action != null && action === "add"){
+      this.addNewNote = true;
+    }
+    if(action != null && action === "edit"){
+      this.addNewNote = false;
+    }
+
+    if(data != null){
+      this.dataEdit = data;
+      
+    }
+
+    
     this.isShowEditNoteModal = true;
   }
 
