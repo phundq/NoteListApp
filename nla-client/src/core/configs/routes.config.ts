@@ -6,6 +6,7 @@ const routesNames = {
     labels: 'labels',
     notes: 'notes',
     noteDetail: 'note-detail',
+    testStore: 'test-store',
     error404: '404',
 }
 
@@ -16,6 +17,7 @@ export const RoutesConfig: any = {
         labels: `/${routesNames.labels}`, 
         notes: `/${routesNames.notes}`, 
         noteDetail: `/${routesNames.noteDetail}`, 
+        testStore: `/${routesNames.testStore}`, 
         error404: `/${routesNames.error404}`
     }
 }

@@ -1,3 +1,4 @@
+import { WelcomeComponent } from './../core/components/home/welcome/welcome.component';
 import { NgZorroAntdModule } from './ng-zorro-antd.module';
 import { NoteFormEditComponent } from './../core/components/note/note-form-edit/note-form-edit.component';
 import { NoteDetailPageComponent } from './../pages/note-detail-page/note-detail-page.component';
@@ -25,6 +26,11 @@ import { registerLocaleData } from '@angular/common';
 import uk from '@angular/common/locales/uk';
 import { HomeComponent } from 'src/pages/home/home.component';
 import { Error404Component } from 'src/pages/error404/error404.component';
+import { TestStoreComponent } from '../pages/test-store/test-store.component';
+import { TestStoreAComponent } from '../core/components/test-store/test-store-a/test-store-a.component';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from '../store';
+import { EffectsModule } from '@ngrx/effects';
 
 registerLocaleData(uk);
 
@@ -45,6 +51,9 @@ registerLocaleData(uk);
     LabelsComponent,
     NoteDetailPageComponent,
     NoteFormEditComponent,
+    WelcomeComponent,
+    TestStoreComponent,
+    TestStoreAComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +63,8 @@ registerLocaleData(uk);
     BrowserAnimationsModule,
     NgZorroAntdModule,
     ReactiveFormsModule,
+    StoreModule.forRoot(appReducer),
+    EffectsModule.forRoot([]),
   ],
   providers: [{ provide: NZ_I18N, useValue: uk_UA }],
   bootstrap: [AppComponent]

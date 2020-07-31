@@ -25,8 +25,10 @@ export class ListNotesComponent implements OnInit {
   removeNote(id: number){
     this.noteService.remoteNote(id).subscribe(res => {
       console.log(res);
-      this.notes =  this.noteService.getNote();
-    });
+      this.getNote();
+    },
+    error => console.log(error)
+    );
     
   }
 

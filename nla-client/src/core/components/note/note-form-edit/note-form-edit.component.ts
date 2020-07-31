@@ -33,10 +33,13 @@ export class NoteFormEditComponent implements OnInit {
   handlerClickOk() {
 
     if(this.title != null && this.content != null && this.noteTypeId != null){
-      this.noteService.addNote(this.title, this.description, this.noteTypeId, this.content).subscribe(x => console.log(x)
+      this.noteService.addNote(this.title, this.description, this.noteTypeId, this.content).subscribe(x => {
+        console.log(x)
+        this.listNotesComponent.getNote();
+      },
+      error => console.log(error)
       );
     }
-    this.listNotesComponent.getNote();
 
     this.closeModal()
 

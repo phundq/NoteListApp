@@ -1,3 +1,4 @@
+import { TestStoreComponent } from './../pages/test-store/test-store.component';
 import { Error404Component } from './../pages/error404/error404.component';
 import { NoteDetailPageComponent } from './../pages/note-detail-page/note-detail-page.component';
 import { NoteComponent } from './../pages/note/note.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path:routesNames.labels, component: LabelComponent},
   {path:routesNames.notes, component: NoteComponent},
   {path:routesNames.noteDetail, component: NoteDetailPageComponent},
+  {path:routesNames.testStore, component: TestStoreComponent},
   {path: routesNames.error404, component: Error404Component},
   {path: '**', redirectTo: '/404'}
 ];
