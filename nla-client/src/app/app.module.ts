@@ -29,8 +29,10 @@ import { Error404Component } from 'src/pages/error404/error404.component';
 import { TestStoreComponent } from '../pages/test-store/test-store.component';
 import { TestStoreAComponent } from '../core/components/test-store/test-store-a/test-store-a.component';
 import { StoreModule } from '@ngrx/store';
-import { appReducer } from '../store';
 import { EffectsModule } from '@ngrx/effects';
+import { addLabel } from '../store/reducers/label.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 registerLocaleData(uk);
 
@@ -63,8 +65,9 @@ registerLocaleData(uk);
     BrowserAnimationsModule,
     NgZorroAntdModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(appReducer),
+    StoreModule.forRoot({labels: addLabel}),
     EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [{ provide: NZ_I18N, useValue: uk_UA }],
   bootstrap: [AppComponent]

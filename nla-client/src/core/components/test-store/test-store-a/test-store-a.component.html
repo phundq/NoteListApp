@@ -1,31 +1,46 @@
 <div style="width: 100%; padding: 2em;">
-    <h2 style="text-align: center;">Test Store Angular</h2>
+  <h2 style="text-align: center;">Test Store Angular</h2>
 </div>
 <div style="width: 100%; padding: 2em;">
-    <h3 class="text-center">Login Page</h3>
-<div class="alert alert-danger" *ngIf="error$ | async">
-    Login fail
-</div>
-<div class="alert alert-success" *ngIf="success$ | async">
-    Login success
-</div>
-<div class="login-form">
-    <form (submit)="submit()" [formGroup]="loginForm">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input class="form-control" id="username" placeholder="Enter email" formControlName="email">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
-        </div>
-        <div class="text-center">
-            <div class="spinner-border" role="status" *ngIf="loading$ | async">
-                <span class="sr-only">Loading...</span>
-              </div>
-        </div>
-        <button type="submit" class="btn btn-primary" [disabled]="loading$ | async">Login</button>
-      </form>
-</div>
-
+  <table class="table table-hover" *ngIf="labels">
+    <thead>
+      <tr>
+        <td>Label Id</td>
+        <td>Label Name</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let label of labels | async">
+        <td>{{ label.id }}</td>
+        <td>{{ label.name }}</td>
+      </tr>
+    </tbody>
+    </table>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <form [formGroup]="myForm" novalidate>
+          <div class="form-group">
+            <label class="col-md-4">Label Id</label>
+            <input type="text" class="form-control" formControlName="id" #id />
+          </div>
+          <div *ngIf="myForm.controls['id'].invalid && (myForm.controls['id'].dirty || myForm.controls['id'].touched)" class="alert alert-danger">
+            <div *ngIf="myForm.controls['id'].errors.required">
+              Name is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4">Label Name</label>
+            <input type="text" class="form-control" formControlName="name" #name/>
+          </div>
+          <div *ngIf="myForm.controls['name'].invalid && (myForm.controls['name'].dirty || myForm.controls['name'].touched)" class="alert alert-danger">
+            <div *ngIf="myForm.controls['name'].errors.required">
+              Name is required.
+            </div>
+          </div>
+            <div class="form-group">
+              <button (click)="addLabel(id.value, name.value)" [disabled]="myForm.pristine || myForm.invalid" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+      </div>
+    </div>
 </div>

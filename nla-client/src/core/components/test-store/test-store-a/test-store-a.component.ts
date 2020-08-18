@@ -1,11 +1,12 @@
-import { Login } from './../../../../store/user/user.actions';
-import { IAppState } from './../../../../store/index';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil, filter, delay } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Add } from './../../../../store/actions/label.action';
+import { filter } from 'rxjs/operators';
+import { AppState, getLabels } from './../../../../app/app.state';
+import { Observable } from 'rxjs';
+import { Label } from '../../../model/label';
+import { Store, createSelector } from '@ngrx/store';
+import { Component, OnInit} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ELabelAction } from 'src/store/actions/label.action';
 
 @Component({
   selector: 'app-test-store-a',
@@ -14,46 +15,27 @@ import { Router } from '@angular/router';
 })
 export class TestStoreAComponent implements OnInit {
 
-  loginForm: FormGroup;
+  labels: Observable<Label[]>;
+  myForm: FormGroup;
 
-  loading$: Observable<boolean>;
-  success$: Observable<boolean>;
-  error$: Observable<boolean>;
-  destroy$: Subject<void> = new Subject();
-  constructor(
-    private fb: FormBuilder,
-    private store: Store<IAppState>,
-    private router: Router
-  ) { }
+  constructor(private store: Store<AppState>, private formBuilder: FormBuilder){
+    this.labels = this.store.select(getLabels);
+    this.createForm()
+   }
 
-  ngOnInit() {
-    // this.loading$ = this.store.select(getLoadingLogin).pipe(takeUntil(this.destroy$));
-    // this.success$ = this.store.select(getSuccessLogin).pipe(takeUntil(this.destroy$));
-    // this.error$ = this.store.select(getFailLogin).pipe(takeUntil(this.destroy$));
-    this.initForm();
-    this.onLoginSucess();
+  ngOnInit() {}
+
+  addLabel(id: number, name: string){
+    console.log(id+'   '+ name);
+    
+    this.store.dispatch(new Add({id, name}));
+    this.myForm.reset();
   }
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-  initForm() {
-    this.loginForm = this.fb.group({
-      email: '',
-      password: ''
-    });
-  }
-  submit() {
-    const { email, password } = this.loginForm.value;
-    this.store.dispatch(new Login({ email, password }));
-  }
-  onLoginSucess() {
-    this.success$.pipe(
-      filter(success => success),
-      //đợi 3s sau khi login thành công,chuyển tới home page
-      delay(3000),
-    ).subscribe(success => {
-      this.router.navigate(['home']);
+
+  createForm() {
+    this.myForm = this.formBuilder.group({
+      id: ['', Validators.required],
+      name: ['', Validators.required]
     });
   }
 
